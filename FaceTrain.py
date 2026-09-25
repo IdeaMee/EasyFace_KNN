@@ -1,6 +1,9 @@
 import cv2
+import os
 
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+name = 'ice'
+os.mkdir(name)
 while True:
     ret, frame = cap.read()
     cv2.rectangle(frame, (250,120), (390,300), (0,0,255), 2)
