@@ -9,7 +9,7 @@ def knn(d, y, k):
 y = []
 X = []
 for f in os.listdir():
-    if not os.path.isfile(f):
+    if not os.path.isfile(f) and not f.startswith("."):
         for i in os.listdir(f):
             if i.endswith(".jpg"):
                 x = plt.imread(f+"/"+i)
