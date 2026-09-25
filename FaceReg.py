@@ -11,9 +11,10 @@ X = []
 for f in os.listdir():
     if not os.path.isfile(f):
         for i in os.listdir(f):
-            x = plt.imread(f+"/"+i)
-            X.append(x.flatten())
-            y.append(f)
+            if i.endswith(".jpg"):
+                x = plt.imread(f+"/"+i)
+                X.append(x.flatten())
+                y.append(f)
 X = np.array(X, dtype=float)
 y = np.array(y)
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
