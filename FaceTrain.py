@@ -10,4 +10,5 @@ while True:
     face = cv2.cvtColor(frame[120:300, 250:390, :], cv2.COLOR_BGR2GRAY)
     cv2.imshow('frame', frame)
     cv2.imshow('face', face)
-    cv2.waitKey(1)
+    if cv2.waitKey(1) & 0xFF == ord('s'):
+        cv2.imwrite(f'{name}/face.jpg', face)
