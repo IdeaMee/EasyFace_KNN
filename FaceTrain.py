@@ -4,5 +4,7 @@ cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 while True:
     ret, frame = cap.read()
     cv2.rectangle(frame, (250,120), (390,300), (0,0,255), 2)
+    face = cv2.cvtColor(frame[120:300, 250:390, :], cv2.COLOR_BGR2GRAY)
     cv2.imshow('frame', frame)
+    cv2.imshow('face', face)
     cv2.waitKey(1)
