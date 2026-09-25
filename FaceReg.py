@@ -2,6 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 import os
+def knn(d, y, k):
+    idx = np.argsort(d)[:k]
+    cls, vote = np.unique(y[idx], return_counts=True)
+    return cls[np.argmax(vote)]
 y = []
 X = []
 for f in os.listdir():
