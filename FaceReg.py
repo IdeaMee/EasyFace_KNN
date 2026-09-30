@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 import os
-K = 3
+K = 5
 def knn(d, y, k):
     idx = np.argsort(d)[:k]
     cls, vote = np.unique(y[idx], return_counts=True)
