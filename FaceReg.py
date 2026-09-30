@@ -20,6 +20,8 @@ X = np.array(X, dtype=float)
 y = np.array(y)
 D = np.array([np.sum((X - x) ** 2, axis=1) for x in X])
 np.fill_diagonal(D, np.inf)
+def error(k):
+    return np.mean([knn(D[i], y, k) != y[i] for i in range(len(X))])
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 while True:
     ret, frame = cap.read()
