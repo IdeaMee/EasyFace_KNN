@@ -22,7 +22,10 @@ D = np.array([np.sum((X - x) ** 2, axis=1) for x in X])
 np.fill_diagonal(D, np.inf)
 def error(k):
     return np.mean([knn(D[i], y, k) != y[i] for i in range(len(X))])
-errors = [error(k) for k in range(1, 11)]
+errors = []
+for k in range(1, 11):
+    errors.append(error(k))
+    print("k =", k, "error =", errors[-1])
 best_k = np.argmin(errors) + 1
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 while True:
