@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 import os
-K = 5
+K = None
 def knn(d, y, k):
     idx = np.argsort(d)[:k]
     cls, vote = np.unique(y[idx], return_counts=True)
@@ -18,16 +18,19 @@ for f in os.listdir():
                 y.append(f)
 X = np.array(X, dtype=float)
 y = np.array(y)
-D = np.array([np.sum((X - x) ** 2, axis=1) for x in X])
-np.fill_diagonal(D, np.inf)
-def error(k):
-    return np.mean([knn(D[i], y, k) != y[i] for i in range(len(X))])
-max_k = np.unique(y, return_counts=True)[1].min()
-errors = []
-for k in range(1, max_k + 1):
-    errors.append(error(k))
-    print("k =", k, "error =", errors[-1])
-best_k = np.argmin(errors) + 1
+if K is None:
+    D = np.array([np.sum((X - x) ** 2, axis=1) for x in X])
+    np.fill_diagonal(D, np.inf)
+    def error(k):
+        return np.mean([knn(D[i], y, k) != y[i] for i in range(len(X))])
+    max_k = np.unique(y, return_counts=True)[1].min()
+    errors = []
+    for k in range(1, max_k + 1):
+        errors.append(error(k))
+        print("k =", k, "error =", errors[-1])
+    best_k = np.argmin(errors) + 1
+else:
+    best_k = K
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 while True:
     ret, frame = cap.read()
