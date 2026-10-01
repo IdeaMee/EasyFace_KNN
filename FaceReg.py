@@ -35,8 +35,10 @@ if K is None:
         errors.append(error(k))
         print("k =", k, "error =", errors[-1])
     best_k = np.argmin(errors) + 1
+    print("best k =", best_k)
 else:
     best_k = K
+    print("using k =", best_k)
 
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 while True:
