@@ -22,8 +22,9 @@ D = np.array([np.sum((X - x) ** 2, axis=1) for x in X])
 np.fill_diagonal(D, np.inf)
 def error(k):
     return np.mean([knn(D[i], y, k) != y[i] for i in range(len(X))])
+max_k = np.unique(y, return_counts=True)[1].min()
 errors = []
-for k in range(1, 11):
+for k in range(1, max_k + 1):
     errors.append(error(k))
     print("k =", k, "error =", errors[-1])
 best_k = np.argmin(errors) + 1
