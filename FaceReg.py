@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 import os
-K = None
+K = None   # ใส่เลข k เอง เช่น K = 3 | None = ทดสอบทุก k แล้วเลือกให้
 def knn(d, y, k):
     idx = np.argsort(d)[:k]
     cls, vote = np.unique(y[idx], return_counts=True)
