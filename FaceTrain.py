@@ -3,6 +3,7 @@ import os
 
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 name = 'ice'
+i = 1
 os.mkdir(name)
 while True:
     ret, frame = cap.read()
@@ -11,4 +12,5 @@ while True:
     cv2.imshow('frame', frame)
     cv2.imshow('face', face)
     if cv2.waitKey(1) & 0xFF == ord('s'):
-        cv2.imwrite(f'{name}/face.jpg', face)
+        cv2.imwrite(f'{name}/{i}.jpg', face)
+        i += 1
