@@ -22,13 +22,15 @@ D = np.array([np.sum((X - x) ** 2, axis=1) for x in X])
 np.fill_diagonal(D, np.inf)
 def error(k):
     return np.mean([knn(D[i], y, k) != y[i] for i in range(len(X))])
+errors = [error(k) for k in range(1, 11)]
+best_k = np.argmin(errors) + 1
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 while True:
     ret, frame = cap.read()
     cv2.rectangle(frame, (250,120), (390,300), (0,0,255), 2)
     face = cv2.cvtColor(frame[120:300, 250:390, :], cv2.COLOR_BGR2GRAY)
     z = face.flatten()
-    name = knn(np.sum((X - z) ** 2, axis=1), y, K)
+    name = knn(np.sum((X - z) ** 2, axis=1), y, best_k)
     cv2.putText(frame, name, (250, 110), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 2)
     cv2.imshow('frame', frame)
     cv2.waitKey(1)
